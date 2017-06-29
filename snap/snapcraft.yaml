@@ -1,0 +1,43 @@
+name: starfish-sensortag-app 
+version: '0.3' 
+#list of architectures the snap may run on. Defaults to [all].
+#architectures: 
+#	- all | amd64 | i386 | armhf
+#architectures: [ amd64 ]    # linux VM/Desktop
+architectures: [ armhf ]    # Embedded platform/SSN IoTR
+
+summary: SSN Starfish example using BLE SensorTag
+description: |
+      Fetch TI BLE CC2650 SensorTag data and post it to SSN Starfish Data Platform
+grade:  devel
+confinement: strict
+
+apps:
+  run:
+    command: bin/nodeapp
+    plugs: [bluetooth-control, network]
+  blescan: 
+    command: bin/blescan
+    plugs: [bluetooth-control]
+  sensortag: 
+    command: bin/sensortag
+    plugs: [bluetooth-control]
+
+parts:
+  starfish-sdk-wrapper:
+    plugin: nodejs
+    source: .
+    node-packages:
+      - starfish-sdk
+
+  bluepy:          # provides blescan, sensortag
+    plugin: python
+    python-version: python3
+#! below python-packages method in snap yaml, sensortag app fails with 'OSError: [Errno 8] Exec format error'
+#! but manual pip build works perfect from command line...
+#     python-packages:
+#       - bluepy         # provides sensortag
+#!building with git, sources works...  why?
+    source: https://github.com/IanHarvey/bluepy
+    source-type: git
+    build-packages: [libglib2.0-dev]
