@@ -1,4 +1,4 @@
-name: starfish-sensortag-app 
+name: starfish-sensortag-app-dhoward
 version: '0.3' 
 #list of architectures the snap may run on. Defaults to [all].
 #architectures: 
