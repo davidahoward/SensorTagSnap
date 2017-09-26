@@ -1,10 +1,5 @@
 name: starfish-sensortag-app-dhoward
-version: '0.3' 
-#list of architectures the snap may run on. Defaults to [all].
-#architectures: 
-#	- all | amd64 | i386 | armhf
-#architectures: [ amd64 ]    # linux VM/Desktop
-architectures: [ armhf ]    # Embedded platform/SSN IoTR
+version: '0.3'
 
 summary: SSN Starfish example using BLE SensorTag
 description: |
